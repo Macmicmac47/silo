@@ -1,0 +1,258 @@
+﻿@model GPS.Web.Models.TeamMemberViewModel
+@{
+//Layout = "../Shared/_MainLayout.cshtml";
+}
+
+<style>
+    .Eregister {
+        background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+        margin-top: 3%;
+        padding: 3%;
+    }
+
+    .Eregister-left {
+        text-align: center;
+        color: #fff;
+        margin-top: 4%;
+    }
+
+    .Eregister-left input {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        width: 60%;
+        background: #f8f9fa;
+        font-weight: bold;
+        color: #383d41;
+        margin-top: 30%;
+        margin-bottom: 3%;
+        cursor: pointer;
+    }
+
+    .Eregister-right {
+        background: #f8f9fa;
+        border-top-left-radius: 10% 50%;
+        border-bottom-left-radius: 10% 50%;
+    }
+
+    .Eregister-left img {
+        margin-top: 15%;
+        margin-bottom: 5%;
+        width: 25%;
+        -webkit-animation: mover 2s infinite alternate;
+        animation: mover 1s infinite alternate;
+    }
+
+    @@-webkit-keyframes mover {
+        0% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @@keyframes mover {
+        0% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .Eregister-left p {
+        font-weight: lighter;
+        padding: 12%;
+        margin-top: -9%;
+    }
+
+    .Eregister .Eregister-form {
+        padding: 10%;
+        margin-top: 10%;
+    }
+
+    .btnEregister {
+        float: right;
+        margin-top: 10%;
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        background: #0062cc;
+        color: #fff;
+        font-weight: 600;
+        width: 50%;
+        cursor: pointer;
+    }
+
+    .Eregister .nav-tabs {
+        margin-top: 3%;
+        border: none;
+        background: #0062cc;
+        border-radius: 1.5rem;
+        width: 28%;
+        float: right;
+    }
+
+    .Eregister .nav-tabs .nav-link {
+        padding: 2%;
+        height: 34px;
+        font-weight: 600;
+        color: #fff;
+        border-top-right-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+
+    .Eregister .nav-tabs .nav-link:hover {
+        border: none;
+    }
+
+    .Eregister .nav-tabs .nav-link.active {
+        width: 100px;
+        color: #0062cc;
+        border: 2px solid #0062cc;
+        border-top-left-radius: 1.5rem;
+        border-bottom-left-radius: 1.5rem;
+    }
+
+    .Eregister-heading {
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: -15%;
+    color: #495057;
+    }
+</style>
+<script type="text/javascript">
+    $(function () { 
+        $('#dobith').datepicker({
+            format: 'mm/dd/yyyy',
+        });
+        $('#HireDate').datepicker({
+            format: 'mm/dd/yyyy',
+        });
+    });  
+</script>
+<div class="container Eregister">
+    <div class="row">
+        <div class="col-md-3 Eregister-left">
+            <h3>Welcome To New Employee Registration Desk</h3>
+        </div>
+        <div class="col-md-9 Eregister-right">
+            <div>
+                <h3 class="Eregister-heading">Register New Employee</h3>
+                @using (Html.BeginForm("Register", "CareTeamMember", FormMethod.Post, new { id = "registratinform", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="row Eregister-form">
+                        <div class="col-md-6">
+                            <div class="form-group control-group">
+                                @Html.TextBoxFor(t => t.FirstName, new { @class = "form-control", id = "FirstName", placeholder = "First Name *" })
+                                @Html.ValidationMessageFor(m=>m.FirstName)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(t => t.LastName, new { @class = "form-control", id = "LastName", placeholder = "Last Name *" })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(t => t.MiddleName, new { @class = "form-control", id = "MiddleName", placeholder = "Middle Name *" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(t => t.DateofBirth, new { @class = "form-control", id = "dobith", placeholder = " Date of Birth*" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(t => t.PlaceofBirth, new { @class = "form-control", id = "PlaceOfBith", placeholder = " Place of Birth*" })
+
+                            </div>
+                            <div class="form-group">
+                                <div class="maxl">
+                                    <label class="radio inline">
+                                        <input type="radio" name="gender" value="male" checked>
+                                        <span> Male </span>
+                                    </label>
+                                    <label class="radio inline">
+                                        <input type="radio" name="gender" value="female">
+                                        <span>Female </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Address" name="Address" placeholder="Address *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="City" name="City" placeholder="City *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Province" name="Province" placeholder="Province *" value="" />
+
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="PostalCode" name="PostalCode" placeholder="Postal Code *" value="" />
+
+                            </div>
+                            <div class="form-group">
+                                @Html.DropDownListFor(v=>v.Country, new List<SelectListItem>
+                                                    { new SelectListItem { Value = "0", Text = "Please Select Country" } }
+                                                    .Concat(Model.CountryList.Select(s => new SelectListItem { Value = s.Value, Text = s.Text })),
+                                       new { @class = "form-control", id = "Country", name= "Country", placeholder = "Country" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" placeholder="Your Email *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" minlength="0" maxlength="10" id="PhoneNumber" name="PhoneNumber" class="form-control" placeholder="Your Phone *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" minlength="0" maxlength="10" name="CellNumber" class="form-control" placeholder="Cell Phone *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" minlength="2" maxlength="10" name="EmergencyContactName" class="form-control" placeholder="Emergency Contact Name *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="EmergencyContactPhoneNumber" placeholder="Emergency Contact Phone" value="" />
+                            </div>
+                            <div class="form-group">                                
+                                @Html.DropDownListFor(v=>v.Demographic, new List<SelectListItem>
+                                                    { new SelectListItem { Value = "0", Text = "Please Select Demographic" } }
+                                                    .Concat(Model.Demographics.Select(s => new SelectListItem { Value = s.Value, Text = s.Text })),
+                                       new { @class = "form-control", id = "drpDemographic", name= "Demographic", placeholder = "Professial Category" })
+                            </div>
+                            <div class="form-group">                             
+                                @Html.DropDownListFor(v=>v.profession, new List<SelectListItem>
+                                                    { new SelectListItem { Value = "0", Text = "Please Select Profession" } }
+                                                    .Concat(Model.professionList.Select(s => new SelectListItem { Value = s.Value, Text = s.Text })),
+                                                 new { @class = "form-control", id = "ProfessionalCategory", name= "ProfessionalCategory", placeholder = "Professial Category" })
+                               </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Specialization" placeholder="Specialization" value="" />
+                            </div>
+                            <div class="form-group">
+                                
+                                @Html.DropDownListFor(v=>v.Department, new List<SelectListItem>
+                                                    { new SelectListItem { Value = "0", Text = "Please Select Department" } }
+                                                    .Concat(Model.DepartmentLists.Select(s=>new SelectListItem {Value= s.Value,Text= s.Text})),
+                                                        new { @class = "form-control", id = "Department", name= "Department" })
+                             </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="HireDate" name="HireDate" placeholder="Hire Date" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="FileUpload">upload photo</label><br />
+                                <br />
+
+                                <input type="file" name="@Html.NameFor(x => x.PhotoFilePath)" id="@Html.IdFor(x => x.PhotoFilePath)" value="Upload file" />
+                                                        @Html.ValidationMessageFor(x => x.PhotoFilePath)
+
+                            </div>
+                                <input type="submit" class="btnEregister" value="register" />
+                            </div>
+                        </div>
+                    
+                })
+            </div>
+        </div>
+    </div>
+</div>

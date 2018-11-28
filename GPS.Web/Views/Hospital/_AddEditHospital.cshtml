@@ -1,0 +1,66 @@
+﻿
+@model GPS.Web.Models.HospitalViewModel
+@using GPS.Web.Utilities
+
+<form asp-action="AddEditHospital" role="form">
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = $"{(Convert.ToInt32(ViewContext.RouteData.Values["id"]) != 0 ? "Edit" : "Add")} hospital" })
+    <div class="modal-body form-horizontal">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label asp-for="HospitalName" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <input asp-for="HospitalName" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <input asp-for="Url" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SslEnabled" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <input asp-for="SslEnabled" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SecureUrl" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <input asp-for="SecureUrl" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label asp-for="Host" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <input asp-for="Host" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HospitalAddress" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <input asp-for="HospitalAddress" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HospitalPhoneNumber" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <input asp-for="HospitalPhoneNumber" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DisplayOrder" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <input asp-for="DisplayOrder" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_ModalFooter", new ModalFooter { })
+</form>
+
+

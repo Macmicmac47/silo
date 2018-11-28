@@ -1,0 +1,20 @@
+﻿
+<div style="padding:20px">
+    <form class="form-search form-inline" method="post" id="initial-form-search">    
+        <br />
+        <div class="input-append">           
+            <input type="text" class="search-query input-sm" id="@Html.Id("searchText")"  name="searchText"  />          
+
+            <div class="form-group">
+                <select class="form-control" name="option" id="drpoption">
+                    <option  selected>Select Criteria</option>
+                    <option id="LastName">LastName</option>
+                    <option id="phone">Phone</option>
+                </select>
+            </div>
+
+            <button id="searchButon" type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+   
+</div>

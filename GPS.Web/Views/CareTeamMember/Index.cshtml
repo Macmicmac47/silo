@@ -1,0 +1,127 @@
+﻿@model List<GPS.Web.Models.TeamMemberViewModel>
+
+@{
+    //Layout = "../Shared/_MainLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<style>
+    input.search-query {
+        padding-left: 26px;
+    }
+
+    form.form-search {
+        position: relative;
+    }
+
+        form.form-search:before {
+            content: '';
+            display: block;
+            width: 14px;
+            height: 14px;
+            background-image: url(http://getbootstrap.com/2.3.2/assets/img/glyphicons-halflings.png);
+            background-position: -48px 0;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            opacity: .5;
+            z-index: 1000;
+        }
+
+    .btn-group, .btn-group-vertical {
+        position: relative;
+        display: inline-block;
+        float: right;
+        vertical-align: middle;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#searchText").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "@Url.Action("GetSearchResultForAutocomplete")",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Keyword: $("#drpoption").val(), value: $("#searchText").val()},
+                    success: function (data) {
+                        //response($.map(data, function (item) {
+                        //    alert(item)
+                        //    return { label: item.LastName, value: item.LastName };
+                        $("#searchText").html(data);
+
+                        //}))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head"> Employee Portal</div>
+    <div class="panel-body">
+        <div style="padding:20px;">
+            @Html.Partial("_SearchView")
+            <div class="btn-group float-right">              
+                <a id="AddNew" asp-action="NewTeamMember"   class="btn btn-info">
+                    <i class="tn btn-success glyphicon glyphicon-plus"></i>  Add New
+                </a>
+            </div>
+            @ViewBag.EmptyMessage;
+            <div class="top-buffer"></div>
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Profession</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                                <td>@Html.DisplayFor(modelItem => item.profession)</td>
+                                <td>@Html.DisplayFor(modelItem => item.EmailAddress)</td>
+                                <td>
+                                    <a id="editCutomerModal" data-toggle="modal" asp-action="EditTeamMember" asp-route-id="@item.CareTeamMemberId" data-target="#modal-action-Hospital"
+                                       class="btn btn-info">
+                                        <i class="glyphicon glyphicon-pencil"></i>  Edit
+                                    </a>
+                                    <a id="deleteCustomerModal" data-toggle="modal" asp-action="DeleteCustomer" asp-route-id="@item.CareTeamMemberId" data-target="#modal-action-customer"
+                                       class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>  Delete
+                                    </a>
+                                    <a id="deleteCustomerModal" data-toggle="modal" asp-action="SeachTeamMember" asp-route-id="@item.CareTeamMemberId" data-target="#modal-action-customer"
+                                       class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-dashboard"></i>  View Details
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div id="modal-container" class="modal fade hidden-print" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

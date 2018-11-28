@@ -1,0 +1,67 @@
+﻿@model IEnumerable<GPS.Web.Models.HospitalViewModel>
+@using GPS.Web.Utilities
+
+
+<div class="row" style="height:200px; align-content:center">
+    @{
+        foreach (var el in Model)
+        {
+            <h1> @el.HospitalName</h1>           
+            <div class="pull-right"> <img src="~/images/flags/@el.CountryfalfPath" /> @el.CountryName</div>
+
+        }
+    }
+
+</div>
+
+
+
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Hospital</div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <a id="createEditHospitalModal" data-toggle="modal"  asp-action="AddEditHospital"  data-target="#modal-action-Hospital" class="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i>  Add Hospital
+            </a>
+        </div>
+        <div class="top-buffer"></div>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>HospitalName</th>
+                    <th>Phone</th>
+                    <th>Host No</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.HospitalName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.HospitalPhoneNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Host)</td>
+                        <td>
+                            <a id="editCutomerModal" data-toggle="modal" asp-action="AddEditHospital" asp-route-id="@item.HospitalId" data-target="#modal-action-Hospital"
+                               class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <a id="deleteHospitalModal" data-toggle="modal" asp-action="DeleteHospital" asp-route-id="@item.HospitalId" data-target="#modal-action-Hospital"
+                               class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-Hospital", AreaLabeledId = "modal-action-Hospital-label", Size = ModalSize.Large })
+
+@section scripts
+    {
+    <script src="~/js/Hospital-index.js" asp-append-version="true"></script>
+}
